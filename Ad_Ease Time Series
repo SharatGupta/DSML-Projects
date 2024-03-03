@@ -1,0 +1,57 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNKP+7aih6bnjqbI0zO6fbQ",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/SharatGupta/DSML-Projects/blob/main/Ad_Ease%20Time%20Series\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "pO6NH8hxsXXl",
+        "outputId": "ab6734d1-bcd3-404c-d82f-430170c03af1"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Downloading...\n",
+            "From (original): https://drive.google.com/uc?id=1qQkymAitU6l2pSe702rDUhQpoP8MUZXl\n",
+            "From (redirected): https://drive.google.com/uc?id=1qQkymAitU6l2pSe702rDUhQpoP8MUZXl&confirm=t&uuid=1477de21-3674-41a6-b9f1-b3fe11d22bd5\n",
+            "To: /content/train_1.csv\n",
+            "100% 278M/278M [00:04<00:00, 57.6MB/s]\n"
+          ]
+        }
+      ],
+      "source": [
+        "!gdown 1qQkymAitU6l2pSe702rDUhQpoP8MUZXl"
+      ]
+    }
+  ]
+}
