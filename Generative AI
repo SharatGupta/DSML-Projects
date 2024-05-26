@@ -1,0 +1,434 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/SharatGupta/DSML-Projects/blob/main/Generative%20AI\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "DRCPtnaEdLZF",
+        "outputId": "97374e0f-d681-48c6-9cb7-bcf17f584836"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting openAI\n",
+            "  Downloading openai-1.30.3-py3-none-any.whl (320 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m320.6/320.6 kB\u001b[0m \u001b[31m3.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: anyio<5,>=3.5.0 in /usr/local/lib/python3.10/dist-packages (from openAI) (3.7.1)\n",
+            "Requirement already satisfied: distro<2,>=1.7.0 in /usr/lib/python3/dist-packages (from openAI) (1.7.0)\n",
+            "Collecting httpx<1,>=0.23.0 (from openAI)\n",
+            "  Downloading httpx-0.27.0-py3-none-any.whl (75 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m75.6/75.6 kB\u001b[0m \u001b[31m5.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: pydantic<3,>=1.9.0 in /usr/local/lib/python3.10/dist-packages (from openAI) (2.7.1)\n",
+            "Requirement already satisfied: sniffio in /usr/local/lib/python3.10/dist-packages (from openAI) (1.3.1)\n",
+            "Requirement already satisfied: tqdm>4 in /usr/local/lib/python3.10/dist-packages (from openAI) (4.66.4)\n",
+            "Requirement already satisfied: typing-extensions<5,>=4.7 in /usr/local/lib/python3.10/dist-packages (from openAI) (4.11.0)\n",
+            "Requirement already satisfied: idna>=2.8 in /usr/local/lib/python3.10/dist-packages (from anyio<5,>=3.5.0->openAI) (3.7)\n",
+            "Requirement already satisfied: exceptiongroup in /usr/local/lib/python3.10/dist-packages (from anyio<5,>=3.5.0->openAI) (1.2.1)\n",
+            "Requirement already satisfied: certifi in /usr/local/lib/python3.10/dist-packages (from httpx<1,>=0.23.0->openAI) (2024.2.2)\n",
+            "Collecting httpcore==1.* (from httpx<1,>=0.23.0->openAI)\n",
+            "  Downloading httpcore-1.0.5-py3-none-any.whl (77 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m77.9/77.9 kB\u001b[0m \u001b[31m5.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hCollecting h11<0.15,>=0.13 (from httpcore==1.*->httpx<1,>=0.23.0->openAI)\n",
+            "  Downloading h11-0.14.0-py3-none-any.whl (58 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m58.3/58.3 kB\u001b[0m \u001b[31m5.1 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: annotated-types>=0.4.0 in /usr/local/lib/python3.10/dist-packages (from pydantic<3,>=1.9.0->openAI) (0.7.0)\n",
+            "Requirement already satisfied: pydantic-core==2.18.2 in /usr/local/lib/python3.10/dist-packages (from pydantic<3,>=1.9.0->openAI) (2.18.2)\n",
+            "Installing collected packages: h11, httpcore, httpx, openAI\n",
+            "Successfully installed h11-0.14.0 httpcore-1.0.5 httpx-0.27.0 openAI-1.30.3\n"
+          ]
+        }
+      ],
+      "source": [
+        "!pip install openAI"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import openai"
+      ],
+      "metadata": {
+        "id": "0sLpyjnLefeG"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "openai.api_key = \"\""
+      ],
+      "metadata": {
+        "id": "V6JWzmbxfG_V"
+      },
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "messages=[\n",
+        "    {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n",
+        "    {\"role\": \"user\", \"content\": \"what is next to RAG in terms of Gen Ai Advancement\"}\n",
+        "    ]"
+      ],
+      "metadata": {
+        "id": "rx2FLd2Xffl9"
+      },
+      "execution_count": 9,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "* we have to define the role of the System, so that it will respond accordingly\n",
+        "* At the same time as a user we can ask our question as below"
+      ],
+      "metadata": {
+        "id": "SSfmfUub2nB8"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "messages"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0GumDdCGfgNh",
+        "outputId": "d02233cd-df02-45f5-8359-f13f1ab8ff96"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[{'role': 'system', 'content': 'You are a helpful assistant.'},\n",
+              " {'role': 'user',\n",
+              "  'content': 'what is next to RAG in terms of Gen Ai Advancement'}]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 10
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "chat_response = openai.chat.completions.create(\n",
+        "  model=\"gpt-3.5-turbo-16k\",\n",
+        "  messages=messages\n",
+        ")"
+      ],
+      "metadata": {
+        "id": "W2bSzEVigMRY"
+      },
+      "execution_count": 12,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "chat_response"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NIsmrIxIgjsy",
+        "outputId": "dd818785-482d-4429-e936-888e400ede44"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "ChatCompletion(id='chatcmpl-9TBWt3uEOPbckYFiXtPYjIh1LeyVc', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='The next advancement after RAG in terms of Generative AI is likely to be further developments in environmentally-aware and socially-conscious AI systems. This includes researching and implementing AI systems that are optimized for energy efficiency, as well as systems that are designed to mitigate biases and promote fairness and equity. Additionally, advancements in AI interpretability and explainability are also expected, allowing users to have a deeper understanding of how AI models make decisions and providing transparency in their operations.', role='assistant', function_call=None, tool_calls=None))], created=1716742859, model='gpt-3.5-turbo-16k-0613', object='chat.completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=91, prompt_tokens=30, total_tokens=121))"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "chat_response.choices[0].message.content\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 87
+        },
+        "id": "B80Q6c8Agmd6",
+        "outputId": "17af9f0a-40e6-4f89-f3b9-8f24c9ee27e6"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'The next advancement after RAG in terms of Generative AI is likely to be further developments in environmentally-aware and socially-conscious AI systems. This includes researching and implementing AI systems that are optimized for energy efficiency, as well as systems that are designed to mitigate biases and promote fairness and equity. Additionally, advancements in AI interpretability and explainability are also expected, allowing users to have a deeper understanding of how AI models make decisions and providing transparency in their operations.'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "prompt = '''You are a helpful Neural Network teaching assistant.\n",
+        "Explain the various optimisation methods in Neural network.\n",
+        "Provide an exhaustive summary of the methods describing what they do,\n",
+        "sample code for each, and guidelines on when to use which method.\n",
+        "'''\n",
+        "\n",
+        "message = [{\"role\": \"user\", \"content\": prompt}]\n"
+      ],
+      "metadata": {
+        "id": "_3N8l3XQh0OE"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "chat_response = openai.chat.completions.create(\n",
+        "    model=\"gpt-3.5-turbo-16k\",\n",
+        "    messages=message,\n",
+        "    max_tokens=800,\n",
+        "    temperature=0.5,\n",
+        "    n=1,\n",
+        "    stop=None,\n",
+        "    frequency_penalty=0,\n",
+        "    presence_penalty=0)\n",
+        "\n",
+        "print(chat_response.choices[0].message.content)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "pE-hQ0QEiXDU",
+        "outputId": "e13d32e2-d986-446c-9095-afd891c25ef9"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "There are several optimization methods commonly used in neural networks to improve the training process and find optimal values for the model's parameters. Some of the popular optimization methods are:\n",
+            "\n",
+            "1. Gradient Descent (GD):\n",
+            "   - Description: GD is a basic optimization method that updates the model's parameters in the opposite direction of the gradient of the loss function with respect to the parameters.\n",
+            "   - Code:\n",
+            "     ```python\n",
+            "     learning_rate = 0.01\n",
+            "     for param in model.parameters():\n",
+            "         param -= learning_rate * param.grad\n",
+            "     ```\n",
+            "   - Guidelines: GD is suitable for small datasets or shallow networks. It can be slow for large datasets or deep networks as it requires computing gradients for the entire dataset.\n",
+            "\n",
+            "2. Stochastic Gradient Descent (SGD):\n",
+            "   - Description: SGD is an optimization method that updates the model's parameters based on the gradient of the loss function computed on a randomly selected subset (mini-batch) of the training data.\n",
+            "   - Code:\n",
+            "     ```python\n",
+            "     learning_rate = 0.01\n",
+            "     for epoch in range(num_epochs):\n",
+            "         for inputs, labels in dataloader:\n",
+            "             optimizer.zero_grad()\n",
+            "             outputs = model(inputs)\n",
+            "             loss = criterion(outputs, labels)\n",
+            "             loss.backward()\n",
+            "             optimizer.step()\n",
+            "     ```\n",
+            "   - Guidelines: SGD is suitable for large datasets as it uses mini-batches, which reduces memory requirements. It can converge faster than GD but may have high variance due to the random sampling of mini-batches.\n",
+            "\n",
+            "3. Mini-Batch Gradient Descent:\n",
+            "   - Description: Mini-Batch GD is a variation of SGD that updates the model's parameters based on the gradient computed on a small randomly selected subset (mini-batch) of the training data.\n",
+            "   - Code:\n",
+            "     ```python\n",
+            "     learning_rate = 0.01\n",
+            "     for epoch in range(num_epochs):\n",
+            "         for i in range(0, num_samples, batch_size):\n",
+            "             optimizer.zero_grad()\n",
+            "             inputs = data[i:i+batch_size]\n",
+            "             labels = targets[i:i+batch_size]\n",
+            "             outputs = model(inputs)\n",
+            "             loss = criterion(outputs, labels)\n",
+            "             loss.backward()\n",
+            "             optimizer.step()\n",
+            "     ```\n",
+            "   - Guidelines: Mini-Batch GD offers a balance between GD and SGD. It reduces the variance of SGD while still being memory-efficient. It is commonly used in practice.\n",
+            "\n",
+            "4. Adam (Adaptive Moment Estimation):\n",
+            "   - Description: Adam is an adaptive optimization algorithm that uses both the first-order moment (mean) and the second-order moment (uncentered variance) of the gradients to update the model's parameters.\n",
+            "   - Code:\n",
+            "     ```python\n",
+            "     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)\n",
+            "     for epoch in range(num_epochs):\n",
+            "         optimizer.zero_grad()\n",
+            "         outputs = model(inputs)\n",
+            "         loss = criterion(outputs, labels)\n",
+            "         loss.backward()\n",
+            "         optimizer.step()\n",
+            "     ```\n",
+            "   - Guidelines: Adam is a popular choice due to its adaptive learning rate and momentum. It works well in most cases and often converges faster than other methods.\n",
+            "\n",
+            "5. RMSprop (Root Mean Square Propagation):\n",
+            "   - Description: RMSprop is an optimization method that uses an exponentially weighted moving average of squared gradients to update the model's parameters. It divides the learning rate by a running average of the recent gradient magnitudes.\n",
+            "   - Code:\n",
+            "     ```python\n",
+            "     optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)\n",
+            "     for epoch in range(num_epochs):\n",
+            "         optimizer.zero_grad()\n",
+            "         outputs = model(inputs)\n",
+            "         loss = criterion(outputs, labels)\n",
+            "         loss.backward()\n",
+            "         optimizer.step()\n",
+            "     ```\n",
+            "   - Guidelines: RMSprop is effective in dealing with the vanishing/exploding gradient problem. It is suitable for recurrent neural networks (RNNs) and can converge faster than basic GD.\n",
+            "\n",
+            "The choice of optimization method depends on various factors such as the dataset size, network architecture, and specific problem. Generally, Adam and RMSprop are preferred\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "chat_response = openai.chat.completions.create(\n",
+        "    model=\"gpt-3.5-turbo-16k\",\n",
+        "    messages=[\n",
+        "    {\"role\": \"system\", \"content\": \"You are a helpful assistant designed to output JSON to the key 'answer'.\"},\n",
+        "    {\"role\": \"user\", \"content\": \"Who won IPL 2020\"}\n",
+        "  ]\n",
+        ")"
+      ],
+      "metadata": {
+        "id": "fHbwPnZ3icWe"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "output = chat_response.choices[0].message.content\n"
+      ],
+      "metadata": {
+        "id": "KfyIkuzLk0ZT"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(output)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ErN1VCO3k21i",
+        "outputId": "bbd4f029-5705-4c73-b483-2d9e8eb96014"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{\n",
+            "  \"answer\": \"Mumbai Indians won IPL 2020.\"\n",
+            "}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import json\n",
+        "\n",
+        "json_output = json.loads(output)\n",
+        "\n",
+        "result = json_output.get('answer', \"None\")\n",
+        "\n",
+        "# The 'result' variable now contains the value associated with the 'answer' key or \"None\" if the key is not present.\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Lm4NGveuk4Ux",
+        "outputId": "2c8bee4f-007f-4235-f11f-008f0ead25dd"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Mumbai Indians won IPL 2020.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "8ZAKjhutlBRS"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
