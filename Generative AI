@@ -27,7 +27,7 @@
     },
     {
       "cell_type": "code",
-      "execution_count": 1,
+      "execution_count": null,
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/"
@@ -80,7 +80,7 @@
       "metadata": {
         "id": "0sLpyjnLefeG"
       },
-      "execution_count": 2,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -91,7 +91,7 @@
       "metadata": {
         "id": "V6JWzmbxfG_V"
       },
-      "execution_count": 8,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -105,7 +105,7 @@
       "metadata": {
         "id": "rx2FLd2Xffl9"
       },
-      "execution_count": 9,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -130,7 +130,7 @@
         "id": "0GumDdCGfgNh",
         "outputId": "d02233cd-df02-45f5-8359-f13f1ab8ff96"
       },
-      "execution_count": 10,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -157,7 +157,7 @@
       "metadata": {
         "id": "W2bSzEVigMRY"
       },
-      "execution_count": 12,
+      "execution_count": null,
       "outputs": []
     },
     {
@@ -172,7 +172,7 @@
         "id": "NIsmrIxIgjsy",
         "outputId": "dd818785-482d-4429-e936-888e400ede44"
       },
-      "execution_count": 13,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -199,7 +199,7 @@
         "id": "B80Q6c8Agmd6",
         "outputId": "17af9f0a-40e6-4f89-f3b9-8f24c9ee27e6"
       },
-      "execution_count": 14,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "execute_result",
